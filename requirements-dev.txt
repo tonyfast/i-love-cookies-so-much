@@ -4,5 +4,6 @@ notebook
 pytest
 pytest-ipynb
 bumpversion
+autopep8
 watchdog
 wheel
