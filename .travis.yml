@@ -1,25 +1,7 @@
 language: python
-
 python: 3.5
-env:
-  - TOXENV=py27
-  - TOXENV=py33
-  - TOXENV=py34
-  - TOXENV=py35
-
 install:
-  - pip install -U tox
-
+- pip install -r requirements-dev.txt
+- python setup.py install
 script:
-  - tox
-
-deploy:
-  provider: pypi
-  distributions: sdist bdist_wheel
-  user: {{ cookiecutter.pypi_username }}
-  password:
-    secure: PLEASE_REPLACE_ME
-  on:
-    tags: true
-    repo: audreyr/python_boilerplate
-    condition: $TOXENV == py27
+- python setup.py test

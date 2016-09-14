@@ -6,17 +6,36 @@ def read(fname):
     with open(join(dirname(__file__), fname)) as f:
         return f.read()
 
+from distutils.core import setup, Command
+# you can also import from setuptools
+
+
+class PyTest(Command):
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        import sys
+        import subprocess
+        errno = subprocess.call([sys.executable, 'runtest.py'])
+        raise SystemExit(errno)
+
 setuptools.setup(
-    name="whatever-forever",
-    version="0.0.16",
-    author="Tony Fast",
-    author_email="tony.fast@gmail.com",
-    description="prototype whatever in the Jupyter notebook",
-    license="BSD-3-Clause",
-    keywords="IPython Magic Jupyter",
-    url="http://github.com/tonyfast/whatever-forever",
+    name="{{cookiecutter.alias}}",
+    version="{{cookiecutter.version}}",
+    author="{{cookiecutter.author}}",
+    author_email="{{cookiecutter.email}}",
+    description="{{cookiecutter.description}}",
+    license="{{cookiecutter.open_source_license}}",
+    keywords="", # Words separated with spaces.
+    url="{{cookiecutter.alias}}",
     packages=setuptools.find_packages(),
-    long_description=read("README.rst"),
+    long_description=read("readme.rst"),
     classifiers=[
         "Topic :: Utilities",
         "Framework :: IPython",
@@ -29,7 +48,14 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Topic :: Software Development :: Testing",
     ],
-    install_requires=[
-        "toolz",
-    ]
+    install_requires={{cookiecutter.install_requires.__str__()}},
+    setup_requires=[
+        'pytest-runner'
+    ],
+    tests_require=[
+        'pytest', 'pytest-ipynb'
+    ],
+    cmdclass={
+        'test': PyTest
+    },
 )

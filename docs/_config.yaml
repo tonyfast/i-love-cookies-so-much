@@ -1,2 +1,2 @@
-baseurl: /whatever-forever
+baseurl: /{{cookiecutter.alias}}
 exclude: ["*.py", "*.ipynb"]
