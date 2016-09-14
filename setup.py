@@ -48,7 +48,7 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Topic :: Software Development :: Testing",
     ],
-    install_requires={{cookiecutter.install_requires.__str__()}},
+    install_requires=[{{cookiecutter.install_requires}}],
     setup_requires=[
         'pytest-runner'
     ],
